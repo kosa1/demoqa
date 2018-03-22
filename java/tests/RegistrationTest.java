@@ -48,6 +48,7 @@ public class RegistrationTest {
         RegisteryPage registeryPage;
         homePage = new DemoqaHomePage(driver);
         registeryPage = homePage.registerUser();
+        /* some test */
         registeryPage.setFirstName(firstName)
                 .setLastName(lastName)
                 .setMartalStatus(maritalStatus)
