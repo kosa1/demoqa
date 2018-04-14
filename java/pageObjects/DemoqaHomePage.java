@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class DemoqaHomePage extends PageObject {
 
-    private WebDriver driver = null;
-
     @FindBy(id = "menu-item-374")
     private WebElement registrationBtn;
 
@@ -26,14 +24,36 @@ public class DemoqaHomePage extends PageObject {
     @FindBy(id ="menu-item-151")
     private WebElement sortableBtn;
 
+    @FindBy(id = "menu-item-97")
+    private  WebElement sliderBtn;
+
+    @FindBy(id = "menu-item-146")
+    private  WebElement datepickerBtn;
+
     public DemoqaHomePage(WebDriver driver) {
         // add veryfication about if critical elements on the page were loaded correctly.
         super(driver);
-        this.driver = driver;
     }
 
     public RegisteryPage registerUser(){
         registrationBtn.click();
         return new RegisteryPage(driver);
     }
+    public SliderPage sliderClick(){
+        sliderBtn.click();
+        return new SliderPage(driver);
+    }
+    public DroppablePage droppableClick(){
+        droppableBtn.click();
+        return new DroppablePage(driver);
+    }
+    public DraggablePage draggableClick(){
+        draggableBtn.click();
+        return new DraggablePage(driver);
+    }
+    public DatepickerPage datepickerClick(){
+        datepickerBtn.click();
+        return new DatepickerPage(driver);
+    }
+
 }

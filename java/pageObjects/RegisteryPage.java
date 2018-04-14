@@ -9,8 +9,6 @@ import static utilities.Utilities.addRandomData;
 
 public class RegisteryPage extends PageObject {
 
-    protected WebDriver driver = null;
-
     @FindBy(id = "name_3_firstname")
     private WebElement firstName;
 
@@ -71,10 +69,11 @@ public class RegisteryPage extends PageObject {
     @FindBy(name = "pie_submit")
     private  WebElement submit;
 
+    @FindBy(className = "piereg_message")
+    private WebElement positiveBox;
 
     public RegisteryPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public RegisteryPage setFirstName(String firstName) {
@@ -210,6 +209,9 @@ public class RegisteryPage extends PageObject {
         return null;
     }
 
+    public WebElement getPositiveBox() {
+        return positiveBox;
+    }
     public RegisteryPage setHobby(String option)
     {
         if(option.equals("Dance")){
