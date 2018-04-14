@@ -1,43 +1,28 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.DemoqaHomePage;
 import pageObjects.RegisteryPage;
 import utilities.Utilities;
 
-import java.util.concurrent.TimeUnit;
+public class RegistrationTest extends TestBase {
 
-public class RegistrationTest {
-
-    WebDriver driver = null;
-    String baseUrl = "http://demoqa.com/";
+   // public RemoteWebDriver driver; // variable can not be static
+    //String baseUrl = "http://demoqa.com/";
     String filePath = "C:\\Users\\Lukasz\\Desktop\\mavenTest\\testshop\\src\\test\\java\\testData\\testDataRegistration2.xlsx";
     String fileName = "testDataRegistration2.xlsx";
     String sheetName = "Registration2";
     String correctRegistration = "Thank you for your registration";
-    DemoqaHomePage homePage = null;
+    RegisteryPage registeryPage;
+    DemoqaHomePage homePage;
 
     @DataProvider
     public Object[][] registrationDataProvider() throws Exception {
         Object[][] regObjectArray;
         regObjectArray = Utilities.getTableArrayExcel(filePath,sheetName);
-        return  (regObjectArray);
-    }
-
-    @BeforeTest
-    public void setUp() {
-        driver = new FirefoxDriver();
-        // It means that if the element is not located on the web page within that time frame, it will throw an exception.
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(baseUrl);
+        return (regObjectArray);
     }
 
     @Test(dataProvider = "registrationDataProvider")
@@ -45,10 +30,10 @@ public class RegistrationTest {
                                  String month, String day, String year,String phoneNumber, String username, String email,
                                  String profilePicture, String aboutYourself, String password)
     {
-        RegisteryPage registeryPage;
+
+        registeryPage = new RegisteryPage(driver);
         homePage = new DemoqaHomePage(driver);
         registeryPage = homePage.registerUser();
-        /* some test test test */
         registeryPage.setFirstName(firstName)
                 .setLastName(lastName)
                 .setMartalStatus(maritalStatus)
@@ -65,20 +50,8 @@ public class RegistrationTest {
                 .setPassword(password)
                 .setPasswordConfirm(password)
                 .setSubmit();
-        WebElement correctBox = driver.findElement(By.className("piereg_message"));
-        //System.out.println("tekst to: "+correctBox.getText());
-        Assert.assertEquals(correctBox.getText(),correctRegistration);
+        WebElement correctBox = registeryPage.getPositiveBox();
         Utilities.takeScrenshot(driver);
-
+        Assert.assertEquals(correctBox.getText(),correctRegistration);
     }
-    @AfterTest
-    public void tearDown() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.quit();
-    }
-
 }
