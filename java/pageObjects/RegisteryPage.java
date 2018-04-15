@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import static utilities.Utilities.addRandomData;
+import static utility.Utilities.addRandomData;
 
 public class RegisteryPage extends PageObject {
 
