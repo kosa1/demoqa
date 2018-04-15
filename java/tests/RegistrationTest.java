@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObjects.DemoqaHomePage;
 import pageObjects.RegisteryPage;
-import utilities.Utilities;
+import utility.Utilities;
 
 public class RegistrationTest extends TestBase {
 
